@@ -1,0 +1,109 @@
+.ImageUploader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    border: 1px solid rgba(93, 94, 224, 0.2);
+
+    &__InputBox {
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    &__Input-Label {
+        flex: 1;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        background-color: #fff;
+        &--active {
+            background-color: #f2f2f2;
+        }
+    }
+    &__Input-Label-Icon {
+        font-size: 5rem;
+        color: #5D5EE0;
+        opacity: .5;
+        &--hidden {
+            display: none;
+        }
+    }
+    &__Input-Label-Message {
+        color: #5D5EE0;
+        font-size: 1rem;
+        line-height: 1em;
+        margin: 9px 0 0 0;
+        opacity: .5;
+        font-weight: 500;
+        &--hidden {
+            display: none;
+        }
+    }
+    &__Input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    &__Canvas {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 3;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+    &__Controls {
+        position: absolute;
+        right: 0;
+        top: -28px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__Controls-Sync {
+        color: #5D5EE0;
+        opacity: 0.5;
+        width: 20px;
+        margin: 0 5px;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+    &__Controls-Done {
+        color: #8BC83A;
+        width: 20px;
+        margin: 0 5px;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+    &__Controls-Delete {
+        color: #ff5a5a;
+        width: 20px;
+        cursor: pointer;
+        margin: 0 5px;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,162 @@
+body, html {
+    height: 100%;
+}
+
+.Editor {
+    background-color: #fff;
+    &__Box {
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100%;
+
+        width: 100vw;
+        height: 100vh;
+        padding: 65px 0 0 0;
+        position: relative;
+
+        &--isMobile {
+            flex-wrap: wrap;
+        }
+
+        &--overlay::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,.8);
+            z-index: 100;
+        }
+    }
+    &__Left {
+        flex: 0 1;
+        padding: 17px 20px 0 0;
+        &--isMobile {
+            flex: 0 0 100%;
+        }
+    }
+    &__Tools {
+        flex: 1;
+        padding: 0 20px 5px 20px;
+    }
+    &__Options {
+        flex: 1;
+        padding: 0 20px 5px 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    &__Center {
+        flex: 0 2 425px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 27px 0 0 0;
+        background-color: hsla(0, 0%, 97%, 1);
+
+        &--isMobile {
+            flex: 0 0 100%;
+        }
+    }
+    &__Right {
+        flex: 0 2 500px;
+        position: relative;
+        &--active {
+            z-index: 150;
+        }
+    }
+
+    &__NextButton {
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 2rem;
+        border-radius: 0.7rem;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+        line-height: 2.18rem;
+        border: 1px solid transparent;
+        margin: 13px 0 15px 10px;
+        cursor: pointer;
+        background-color: hsl(247, 69%, 53%);
+
+        display: none;
+        &--visible {
+            display: inline-block;
+        }
+        &:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+
+    &__BackButton {
+        color: #707070;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 2rem;
+        border-radius: 0.7rem;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+        line-height: 2.18rem;
+        border: 1px solid transparent;
+        margin: 13px 0 15px 10px; 
+        cursor: pointer;
+        background-color: #fff;
+        white-space: nowrap;
+
+        display: none;
+        &--visible {
+            display: inline-block;
+        }
+    }
+
+    &__UndoButton {
+        color: #707070;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 .5rem;
+        border-radius: 0.7rem;
+        line-height: 2.18rem;
+        border: 1px solid transparent;
+        margin: 13px 0 15px 10px; 
+        cursor: pointer;
+        background-color: #fff;
+        white-space: nowrap;
+
+        display: none;
+        &--visible {
+            display: inline-block;
+        }
+    }
+
+    &__Loading {
+        height: 500px;
+        max-width: 500px;
+        width: 100%;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 300;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    &__Loading-Message {
+        font-size: 2rem;
+        line-height: 1em;
+        text-align: center;
+        color: #aaa;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        font-weight: 700;
+        font-weight: 300;
+        margin: 0 10px 20px 10px;
+    }
+    &__Loading-Bot {
+        background-image: url('/images/gifs/bot_loader_transparent.gif');
+        width: 350px;
+        height: 350px;
+    }
+}

@@ -1,0 +1,86 @@
+.Saved {
+    &__List {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    &__Item {
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__Center {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100vw;
+        min-height: 100vh;
+        padding: 100px 0 150px 0;
+    }
+
+    &__Controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    &__EditButton,
+    &__DownloadButton {
+        color: #fff !important;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 2rem;
+        border-radius: 0.7rem;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+        line-height: 2.18rem;
+        border: 1px solid transparent;
+        margin: 13px 0 15px 10px;
+        cursor: pointer;
+        background-color: hsl(247, 69%, 53%);
+        text-decoration: none !important;
+
+        display: none;
+        &--visible {
+            display: block;
+        }
+    }
+
+    &__Loading {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__Loading-Bot {
+        background-image: url('/images/gifs/bot_loader.gif');
+        width: 350px;
+        height: 350px;
+    }
+    &__DeleteButton {
+        padding: 10px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
+    &__Placeholder {
+        background-color: #ccc;
+        text-align: center;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            opacity: 0.5;
+            height: 25px;
+        }
+    }
+}

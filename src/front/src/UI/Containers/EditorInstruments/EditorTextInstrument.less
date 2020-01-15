@@ -1,0 +1,132 @@
+.EditorTextInstrument {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 0 0 0 0;
+    &__Title {
+        font-size: 1.5rem;
+        width: 100%;
+        margin-right: 40px;
+        padding: 0 40px;
+    }
+    &__Controls {
+        padding-left: 15px;
+        position: relative;
+        z-index: 100;
+        display: flex;
+        width: 300px;
+    }
+
+    &__Control {
+        margin: 2px;
+        position: relative;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 6px;
+    }
+    &__Control-Input {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 5px;
+        width: 150px;
+    }
+    &__Control-Select {
+        margin: 0;
+        flex: 1;
+    }
+    &__Control-Title {
+        font-size: .8rem;
+        line-height: 1em;
+        color: #565656;
+        font-weight: 400;
+        margin: 0 0 12px 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__Control-Title-Prefix {
+        white-space: nowrap;
+    }
+    &__Control-Title-Core {
+        font-weight: 500;
+    }
+    &__Control-Title-Cancel {
+        cursor: pointer;
+        margin: 0 0 0 20px;
+        &--hidden {
+            display: none;
+        }
+    }
+    &__Control-Color-Cover {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        display: none;
+        &--visible {
+            display: block;
+        }
+    }
+    &__Control-Color-Picker {
+        position: absolute;
+        z-index: 200;
+        left: 0;
+        top: 70px;
+        bottom: 113%;
+    }
+    &__Control-Color {
+        display: flex;
+        height: 36px;
+        width: 36px;
+        border-radius: 0.5rem;
+        align-items: stretch;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        border: 1px solid #ced4da;
+        overflow: hidden;
+        margin: 0;
+    }
+    &__Control-Color-Sample {
+        flex: 1;
+        width: 50px;
+        display: block;
+    }
+    &__Control-Button {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        border: 1px solid hsla(0, 0%, 89%, 1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        text-align: center;
+        margin: 0;
+        padding: 15px;
+        cursor: pointer;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: hsla(0, 0%, 48%, 1);
+        background-color: hsl(0, 0%, 98%);
+    }
+
+    &__Control-Letter-Space {
+        width: 100%;
+        height: 100%;
+        background-size: 70%;
+        background-image: url(/images/icons/Letter-space.svg);
+        background-position: 6px 7px;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 5px 0;
+    }
+}

@@ -1,0 +1,105 @@
+.Design {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+
+    box-shadow: 0px 0px 10px 0px hsla(0, 0%, 0%, 0.28);
+    border: 1px solid hsla(0, 0%, 0%, 0.19);
+
+    display: flex;
+    flex-direction: column;
+    
+    &--justifyContent-flex-start {
+        justify-content: flex-start;
+    }
+    &--justifyContent-flex-end {
+        justify-content: flex-end;
+    }
+    &--justifyContent-space-between {
+        justify-content: space-between;
+    }
+
+    &--noShadow {
+        box-shadow: none;
+    }
+
+    &--hoverEffect {
+        transform: scale(1);
+        transition: transform .1s;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    &__Hover {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 3;
+        background: radial-gradient(hsla(0, 0%, 0%, 0.35) 70%, hsla(0, 0%, 0%, 0));
+         
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+
+        display: none;
+    }
+    &:hover & {
+        &__Hover {
+            display: flex;
+        }
+    }
+    &__Hover-Inner {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+        color: #fff;
+        padding: 10px 20px 8px 20px;
+        border: 1px solid #fff;
+        background-color: transparent;
+        border-radius: 0.7rem;
+    }
+
+    &__Background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        user-select: none;
+    }
+    &__Padding {}
+    &__DraggableBox {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+
+        pointer-events: none;
+        &--active {
+            pointer-events: all;
+        }
+        &--text {
+            position: relative;
+        }
+    }
+    &__Foreground {
+        width: 100%;
+        height: auto;
+        user-select: none;
+    }
+    &__BookTitle,
+    &__AuthorName,
+    &__SubTitle {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,61 @@
+.Footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 10;
+
+    background-color: #fff;
+    padding: 22px 0 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    &__SkipButton {
+        color: #2d3136;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 65px;
+        border-radius: 0.7rem;
+        border: 1px solid #2d3136;
+        line-height: 3.625rem;
+        background-color: #fff;
+
+        cursor: default;
+        &--active {
+            cursor: pointer;
+        }
+
+        display: none;
+        &--visible {
+            display: block;
+        }
+    }
+
+    &__NextButton {
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding: 0 65px;
+        border-radius: 0.7rem;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.18);
+        line-height: 3.625rem;
+        border: 1px solid transparent;
+
+        cursor: default;
+        background-color: hsla(247, 69%, 53%, 0.3);
+        transition: background-color .6s;
+        &--active {
+            cursor: pointer;
+            background-color: hsl(247, 69%, 53%);
+        }
+
+        display: none;
+        &--visible {
+            display: block;
+        }
+    }
+}

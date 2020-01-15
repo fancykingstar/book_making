@@ -1,0 +1,22 @@
+.SelectAlt {
+    position: relative;
+    &__Select {
+        height: 3.63rem;
+        border-radius: .5rem;
+        -webkit-appearance: none;
+        &--selected {}
+    }
+    &__Check {
+        position: absolute;
+        right: -36px;
+        top: 50%;
+        transform: translateY(-8px);
+        color: #8BC83A;
+        margin: 0;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,130 @@
+.Rates {
+    &__Center {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100vw;
+        min-height: 100vh;
+        padding: 100px 0 150px 0;
+    }
+    &__List {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        flex-wrap: wrap;
+    }
+    &__Item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 200px;
+        margin: 50px 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: hsla(244, 67%, 99%, 1);
+        border: 1px solid #4a41da14;
+    }
+    &__Name {
+        font-size: 2rem;
+        line-height: 1em;
+        padding: 0 0 20px 0;
+        color: #2d3136;
+    }
+    &__DiscountBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    &__Discount {
+        background-color: #e93f3336;
+        padding: 6px;
+        border-radius: 8px;
+        color: #801710;
+        font-weight: 600;
+        margin: 0 0 0 10px;
+    }
+    &__OldPrice {
+        font-size: 1.5rem;
+        line-height: 1em;
+        color: #f00;
+        font-weight: 600;
+        text-decoration: line-through;
+        margin: 10px 0;
+    }
+    &__NewPrice {
+        font-size: 2.5rem;
+        line-height: 1em;
+        padding: 30px 0;
+    }
+    &__Description {
+        font-size: 1rem;
+        line-height: 1.4em;
+        color: hsl(0, 0%, 53%);
+    }
+    &__SubscribeButton {
+        color: hsl(247,69%,53%);
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0 35px;
+        border-radius: .7rem;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
+        line-height: 3.625rem;
+        border: 1px solid hsl(247,69%,53%);
+        background-color: transparent;
+        transition: background-color .6s;
+        cursor: pointer;
+        margin: 30px 0 0 0;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        text-decoration: none;
+        opacity: .5;
+
+        &:hover {
+            text-decoration: none;
+            color: hsl(247,69%,53%);
+            cursor: default;
+        }
+
+        &--active {
+            opacity: 1;
+        }
+
+        &--active:before {
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            height: 100%;
+            width: 0px;
+            z-index: -1;
+            border-radius: 5px;
+            content: '';
+            background: rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+        }
+
+        &--active:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+        &--active:hover:before {
+            background: #4733d9;
+            left: 0%;
+            right: auto;
+            width: 100%;
+        }
+    }
+    &__PayPalBox {
+        padding: 40px 0 0 0;
+    }
+    &__Download {
+        display: flex;
+        align-items: center;
+    }
+}

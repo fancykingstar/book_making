@@ -1,0 +1,6 @@
+export WizardStep1 from './WizardStep1.react'
+export WizardStep2 from './WizardStep2.react'
+export WizardStep3 from './WizardStep3.react'
+export WizardStep4 from './WizardStep4.react'
+export WizardStep5 from './WizardStep5.react'
+export WizardStep6 from './WizardStep6.react'

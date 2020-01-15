@@ -1,0 +1,31 @@
+.Designs {
+    max-width: 900px;
+
+    &__List {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+    }
+    &__Item {
+        background: linear-gradient(180deg, rgba(200,200,200,1) 0%, rgba(220,220,220,1) 100%);;
+        margin: 10px;
+    }
+
+    &__Placeholder {
+        text-align: center;
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 25px;
+            opacity: 0.5;
+            height: 25px;
+        }
+    }
+}

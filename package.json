@@ -1,0 +1,17 @@
+{
+  "name": "deflamel",
+  "version": "1.0.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.0"
+  },
+  "dependencies": {
+    "local-web-server": "^3.0.7"
+  }
+}

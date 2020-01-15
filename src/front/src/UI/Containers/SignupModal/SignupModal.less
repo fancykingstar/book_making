@@ -1,0 +1,53 @@
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes moveUp {
+	0% {
+		margin-top: 15px;
+	}
+
+	100% {
+		margin-top: 0;
+	}
+}
+
+.SignUpModal {
+	animation-name: fadeIn;
+	animation-duration: 0.7s;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+
+	.modalContainer {
+		border-radius: 5px;
+		animation-name: fadeIn;
+		animation-name: moveUp;
+		animation-duration: 0.7s;
+		position: fixed;
+		top: 50%;
+		max-width: 600px;
+		box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+		width: 90%;
+		left: 50%;
+		background-color: #fff;
+		transform: translate(-50%, -50%);
+		align-items: center;
+		padding: 50px;
+	}
+
+	.terms {
+		font-size: 12px;
+	}
+}

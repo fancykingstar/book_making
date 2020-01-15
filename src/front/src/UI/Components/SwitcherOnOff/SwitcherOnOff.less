@@ -1,0 +1,23 @@
+.SwitcherOnOff {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    &__Item {
+        flex: 1;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color .2s;
+        &--active {
+            background-color: #4a41da;
+            color: #fff;
+            cursor: default;
+        }
+    }
+}

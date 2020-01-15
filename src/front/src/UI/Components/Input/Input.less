@@ -1,0 +1,24 @@
+.Input {
+    width: 100%;
+    max-width: 570px;
+    position: relative;
+
+    &__Input {
+        padding: 1.75rem .75rem;
+        border-radius: .5rem;
+        &--selected {}
+    }
+    &__Check {
+        position: absolute;
+        right: -36px;
+        top: 50%;
+        transform: translateY(-8px);
+        color: #8BC83A;
+        margin: 0;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+}

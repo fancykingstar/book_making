@@ -1,0 +1,44 @@
+.Textarea {
+    width: 100%;
+    max-width: 570px;
+    margin: 40px 0 0 0;
+    position: relative;
+    &__Labels-Box {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__Label-Prefix {
+        display: block;
+        text-align: right;
+        color: #7B7B7B;
+        font-size: .8rem;
+        line-height: 1em;
+        padding: 0 0 0 0.75rem;
+    }
+    &__Label-Postfix {
+        display: block;
+        text-align: right;
+        color: #7B7B7B;
+        font-size: .8rem;
+        line-height: 1em;
+        padding: 0 0.75rem 0 0;
+    }
+    &__Textarea {
+        padding: 1rem .75rem;
+        border-radius: .5rem;
+        &--selected {}
+    }
+    &__Check {
+        position: absolute;
+        right: -36px;
+        top: 50%;
+        transform: translateY(-8px);
+        color: #8BC83A;
+        margin: 0;
+
+        display: none;
+        &--active {
+            display: block;
+        }
+    }
+}
