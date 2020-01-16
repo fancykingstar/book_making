@@ -2,6 +2,7 @@ import I from 'immutable'
 
 import {
     BOOK_COVER_UPDATE,
+    BOOK_SAVE
 } from 'Redux/Actions/BookCover/BookCover.actions'
 
 const DEFAULT_STATE = I.fromJS({})

@@ -50,64 +50,64 @@ class Editor extends Component {
         if (!editorOptions)
             return null
 
-        const backgroundImage = editorOptions.getIn(["design", "backgroundImage"])
-        if (backgroundImage.get("size") == IMAGE_SIZES.get("PREVIEW") &&
-            !this.state.loading[backgroundImage.get("id")]) {
+        // const backgroundImage = editorOptions.getIn(["design", "backgroundImage"])
+        // if (backgroundImage.get("size") == IMAGE_SIZES.get("PREVIEW") &&
+        //     !this.state.loading[backgroundImage.get("id")]) {
 
-            this.setState(prevState => ({
-                loading: {
-                    ...prevState.loading,
-                    [backgroundImage.get("id")]: true,
-                },
-            }))
-            this.getLargeImage(backgroundImage.set("type", 0), d => {
-                const design = editorOptions.get("design").update("backgroundImage", image =>
-                    image
-                    .set("src", `data:image/png;base64,${d.webformatBase64}`)
-                    .set("size", IMAGE_SIZES.get("WEB_FORMAT"))
-                )
-                this.props.EditorOptionsActions.update({
-                    design,
-                })
-                setTimeout(() => {
-                    this.setState(prevState => ({
-                        loading: {
-                            ...prevState.loading,
-                            [backgroundImage.get("id")]: false,
-                        },
-                    }))
-                }, 200)
-            })
-        }
+        //     this.setState(prevState => ({
+        //         loading: {
+        //             ...prevState.loading,
+        //             [backgroundImage.get("id")]: true,
+        //         },
+        //     }))
+        //     this.getLargeImage(backgroundImage.set("type", 0), d => {
+        //         const design = editorOptions.get("design").update("backgroundImage", image =>
+        //             image
+        //             .set("src", `data:image/png;base64,${d.base64}`)
+        //             .set("size", IMAGE_SIZES.get("WEB_FORMAT"))
+        //         )
+        //         this.props.EditorOptionsActions.update({
+        //             design,
+        //         })
+        //         setTimeout(() => {
+        //             this.setState(prevState => ({
+        //                 loading: {
+        //                     ...prevState.loading,
+        //                     [backgroundImage.get("id")]: false,
+        //                 },
+        //             }))
+        //         }, 200)
+        //     })
+        // }
 
-        const foregroundImage = editorOptions.getIn(["design", "foregroundImage"])
-        if (foregroundImage.get("size") == IMAGE_SIZES.get("PREVIEW") &&
-            !this.state.loading[foregroundImage.get("id")]) {
+        // const foregroundImage = editorOptions.getIn(["design", "foregroundImage"])
+        // if (foregroundImage.get("size") == IMAGE_SIZES.get("PREVIEW") &&
+        //     !this.state.loading[foregroundImage.get("id")]) {
 
-            this.setState(prevState => ({
-                loading: {
-                    ...prevState.loading,
-                    [foregroundImage.get("id")]: true,
-                },
-            }))
-            this.getLargeImage(foregroundImage.set("type", 1), d => {
-                const design = editorOptions.get("design").update("foregroundImage", image =>
-                    image.set("src", `data:image/png;base64,${d.webformatBase64}`)
-                    .set("size", IMAGE_SIZES.get("WEB_FORMAT"))
-                )
-                this.props.EditorOptionsActions.update({
-                    design,
-                })
-                setTimeout(() => {
-                    this.setState(prevState => ({
-                        loading: {
-                            ...prevState.loading,
-                            [foregroundImage.get("id")]: false,
-                        },
-                    }))
-                }, 200)
-            })
-        }
+        //     this.setState(prevState => ({
+        //         loading: {
+        //             ...prevState.loading,
+        //             [foregroundImage.get("id")]: true,
+        //         },
+        //     }))
+        //     this.getLargeImage(foregroundImage.set("type", 1), d => {
+        //         const design = editorOptions.get("design").update("foregroundImage", image =>
+        //             image.set("src", `data:image/png;base64,${d.base64}`)
+        //             .set("size", IMAGE_SIZES.get("WEB_FORMAT"))
+        //         )
+        //         this.props.EditorOptionsActions.update({
+        //             design,
+        //         })
+        //         setTimeout(() => {
+        //             this.setState(prevState => ({
+        //                 loading: {
+        //                     ...prevState.loading,
+        //                     [foregroundImage.get("id")]: false,
+        //                 },
+        //             }))
+        //         }, 200)
+        //     })
+        // }
     }
 
     handlePrevStep() {
@@ -149,14 +149,8 @@ class Editor extends Component {
         const data = {
             modelId: image.get("modelId"),
             type: image.get("type"),
-            base64: image.get("base64"),
-            url: image.get("url"),
+            url: image.get("src"),
             path: image.get("path"),
-            width: image.get("width"),
-            height: image.get("height"),
-            titleColor: image.get("titleColor"),
-            authorColor: image.get("authorColor"),
-            key: image.get("key")
         }
         fetch("/api/images/get", {
             method: "POST",

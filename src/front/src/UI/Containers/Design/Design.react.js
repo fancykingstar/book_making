@@ -304,9 +304,7 @@ class Design extends Component {
         )
 
         const designSrc = design.getIn(["backgroundImage", "src"])
-        console.log(designSrc);
         const isBase64 = designSrc && designSrc.includes('base64')
-
         return (
             <FontLoader fonts2load={[bookTitleFontSlug, authorNameFontSlug]}>
                 <div

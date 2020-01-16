@@ -126,7 +126,8 @@ class WizardStep6 extends Component {
 						id: fImage.get('id'),
 						src: d.url,
 						modelId: d.modelId,
-						size: IMAGE_SIZES.get('WEB_FORMAT')
+						size: IMAGE_SIZES.get('WEB_FORMAT'),
+						path: d.path
 					}
 				});
 			});
@@ -140,82 +141,86 @@ class WizardStep6 extends Component {
 						id: bImage.get('id'),
 						src: d.url,
 						modelId: d.modelId,
-						size: IMAGE_SIZES.get('WEB_FORMAT')
+						size: IMAGE_SIZES.get('WEB_FORMAT'),
+						path: d.path,
 					}
 				});
 			});
 		}
 
 		const props = {
-			// color: 'orange',//`${bookCover.getIn(["selectedColor", "id"]).toLowerCase()}`,
-			// text: 'Heres a bunch of text ba',
-			// models: this.getStyles(),
-			// genre: 'Horror',
-			// title: 'Heres a bunch of text ba'
 			color: 'orange', //`${bookCover.getIn(["selectedColor", "id"]).toLowerCase()}`,
 			text: bookCover.get('bookDescription'),
 			models: this.getStyles(),
 			genre: bookCover.toJS().bookGenre.title,
 			title: bookCover.toJS().bookTitleText
 		};
-		console.log("==============", props);
+		console.log("================", this.props.bookCover.get("data"));
 
-		const baseURL = 'http://dev.deflamel.com'; // Config.API_ROOT_HTTP
+		if (!this.props.bookCover.get("data")) {
+			fetch(`/api/images/ResultNew`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(props)
+			}).then(response => {
+				if (!response.ok)
+					return alert('Oops, something went wrong, try again please');
 
-		fetch(`/api/images/ResultNew`, {
+				response.json().then(json => {
+					this.props.BookCoverActions.update({
+						data: json
+					});
+					this.batchImages(json, props)
+				});
+			});
+		} else {
+			const data = this.props.bookCover.toJS().data
+			this.batchImages(data, props)
+		}
+	}
+
+	batchImages(json, props) {
+		fetch(`/api/images/batch`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(props)
-		}).then(response => {
-			if (!response.ok)
-				return alert('Oops, something went wrong, try again please');
+			body: JSON.stringify({
+				...props,
+				items: [
+					...json.frontalImages.slice(0, 8),
+					...json.backgroundImages.slice(0, 8)
+				]
+			})
+		}).then(batchResponse => {
+			batchResponse.json().then(json => {
+				const backgroundImages = json.filter(
+					img => img.type === 1
+				);
+				const foregroundImages = json.filter(
+					img => img.type === 0
+				);
 
-			response.json().then(json => {
-				fetch(`/api/images/batch`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						...props,
-						items: [
-							...json.frontalImages.slice(0, 8),
-							...json.backgroundImages.slice(0, 8)
-						]
-					})
-				}).then(batchResponse => {
-					// console.log('sadas');
-					// return;
-					batchResponse.json().then(json => {
-						const backgroundImages = json.filter(
-							img => img.type === 1
+				if (this.firstTime) {
+					this.handleImages(
+						backgroundImages,
+						foregroundImages
+					);
+					this.firstTime = false;
+				} else {
+					this.batch = { backgroundImages, foregroundImages };
+
+					if (this.state.loading) {
+						this.batch = null;
+						this.handleImages(
+							backgroundImages,
+							foregroundImages
 						);
-						const foregroundImages = json.filter(
-							img => img.type === 0
-						);
-
-						if (this.firstTime) {
-							this.handleImages(
-								backgroundImages,
-								foregroundImages
-							);
-							this.firstTime = false;
-						} else {
-							this.batch = { backgroundImages, foregroundImages };
-
-							if (this.state.loading) {
-								this.batch = null;
-								this.handleImages(
-									backgroundImages,
-									foregroundImages
-								);
-							}
-							console.log('go...');
-						}
-					});
-				});
+					}
+					console.log('go...');
+				}
 			});
 		});
 	}
@@ -226,7 +231,9 @@ class WizardStep6 extends Component {
 				backgroundImages.map(d => ({
 					src: d.url,
 					modelId: d.modelId,
-					size: IMAGE_SIZES.get('PREVIEW')
+					path: d.path,
+					size: IMAGE_SIZES.get('PREVIEW'),
+					type: d.type,
 					// id: Math.floor(Math.random()*1e6),
 					// webformatUrl: d.webformatUrl,
 					// largeImageUrl: d.largeImageUrl,
@@ -238,7 +245,9 @@ class WizardStep6 extends Component {
 				foregroundImages.map(d => ({
 					src: d.url,
 					modelId: d.modelId,
-					size: IMAGE_SIZES.get('PREVIEW')
+					path: d.path,
+					size: IMAGE_SIZES.get('PREVIEW'),
+					type: d.type,
 					// id: Math.floor(Math.random()*1e6),
 					// webformatUrl: d.webformatUrl,
 					// largeImageUrl: d.largeImageUrl,
@@ -342,9 +351,6 @@ class WizardStep6 extends Component {
 			: bookCover.get('backgroundImageAlternatives');
 		const { loading } = this.state;
 		const isLoggedIn = user && user.get('IsAuthorized');
-
-		console.log("**********", foregroundImages);
-		console.log("**********", backgroundImages);
 
 		return (
 			<article className={this.bem()}>

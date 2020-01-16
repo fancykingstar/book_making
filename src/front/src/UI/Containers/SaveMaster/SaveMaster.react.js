@@ -150,11 +150,10 @@ class SaveMaster extends Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				webformatUrl: image.get('webformatUrl'),
-				largeImageUrl: image.get('largeImageUrl'),
-				src: image.get('src'),
-				modelId: image.get('modelId'),
-				type: image.get('type'),
+				modelId: image.get("modelId"),
+	            type: image.get("type"),
+	            url: image.get("src"),
+	            path: image.get("path"),
 				Width: image.get('width'),
 				Height: image.get('height')
 			})
