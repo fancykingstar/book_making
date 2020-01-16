@@ -172,7 +172,7 @@ class Saved extends Component {
                                             
                                         >
                                             <div className={this.bem("Placeholder")} style={{ width, height }}>
-                                                <img src="/images/gifs/loading.gif" />
+                                                <img src={url("/images/gifs/loading.gif")} />
                                             </div>
                                             {this.renderControls(user, null)}
                                         </li>)
