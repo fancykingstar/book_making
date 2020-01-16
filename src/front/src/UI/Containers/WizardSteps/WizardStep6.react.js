@@ -30,6 +30,7 @@ import BookCoverSelector from 'Redux/Selectors/BookCover/BookCover.selector';
 import * as BookCoverActions from 'Redux/Actions/BookCover/BookCover.actions';
 import * as EditorOptionsActions from 'Redux/Actions/EditorOptions/EditorOptions.actions';
 
+
 class WizardStep6 extends Component {
 	constructor(props) {
 		super(props);
@@ -39,7 +40,8 @@ class WizardStep6 extends Component {
 		this.state = {
 			limit: 8,
 			loading: true,
-			authorized: false
+			authorized: false,
+			refreshLoading: false
 		};
 
 		this.batch = null;
@@ -125,7 +127,8 @@ class WizardStep6 extends Component {
 			this.props.BookCoverActions.update({
 				foregroundImage: {
 					id: fImage.get('id'),
-					src: fImage.get('src')
+					src: fImage.get('src'),
+					size: IMAGE_SIZES.get("PREVIEW")
 				}
 			});
 		}
@@ -135,7 +138,8 @@ class WizardStep6 extends Component {
 			this.props.BookCoverActions.update({
 				backgroundImage: {
 					id: bImage.get('id'),
-					src: bImage.get('src')
+					src: bImage.get('src'),
+					size: IMAGE_SIZES.get("PREVIEW")
 				}
 			});
 		}
@@ -246,30 +250,17 @@ class WizardStep6 extends Component {
 				}))
 			);
 
-		this.setState({
-			loading: false
-		});
+		this.setState({loading: false});
 
 		this.props.BookCoverActions.update({
 			updated: false
 		});
-
-		this.getImages();
 	}
 
 	getBatch() {
-		// this.setState({ loading: true });
-		if (this.batch) {
-			this.setState({ loading: true }, () => {
-				this.handleImages(
-					this.batch.frontalImages,
-					this.batch.backgroundImages
-				);
-				this.batch = null;
-			});
-		} else {
-			this.setState({ loading: true });
-		}
+		this.setState({ loading: true }, () => {
+			this.getImages()
+		});
 	}
 
 	componentDidMount() {
@@ -312,12 +303,6 @@ class WizardStep6 extends Component {
 		this.props.history.push('/editor');
 	}
 
-	// handleIncreaseLimit() {
-	//     this.setState(prevState => ({
-	//         limit: prevState.limit + 28,
-	//     }))
-	// }
-
 	render() {
 		const { bookCover, user } = this.props;
 		const foregroundImages = bookCover.get('foregroundImage')
@@ -332,14 +317,14 @@ class WizardStep6 extends Component {
 		const refreshStyle = {
 			    "display": "-webkit-flex;",
 			    "display": "flex",
-			    "align-items": "center",
+			    "alignItems": "center",
 			    "justifyContent": "center",
 			    "position": "fixed",
 			    "bottom": "0",
 			    "left": "0",
 			    "right": "0",
-			    "z-index": "10",
-			    "background-color": "#fff",
+			    "zIndex": "10",
+			    "backgroundColor": "#fff",
 			    "padding": "22px 0 20px",
 			    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.1)"
 		}
@@ -356,19 +341,9 @@ class WizardStep6 extends Component {
 							? 'Bear with us, your designs are about to be ready!'
 							: 'Click on a design to start personalizing!'}
 					</Title>
-					{/* 
-                    {
-                        loading &&
-                        <div style={{ opacity: (isLoggedIn || this.state.authorized) ? 1 : 0 }} className={this.bem("Loading")}>
-                            <div className={this.bem("Loading-Bot")}/>
-                        </div>
-                    }
-                    {
-                        !loading &&  */}
 					<Designs
 						limit={this.state.limit}
 						className={this.bem('Designs')}
-						// shouldUpdate={!!bookCover.get("updated")}
 						width={200}
 						height={300}
 						scale={1 / 3}
@@ -376,12 +351,9 @@ class WizardStep6 extends Component {
 						hoverEffect
 						foregroundImages={foregroundImages}
 						backgroundImages={backgroundImages}
-						bookTitleColor={'orange'} //bookCover.getIn(["selectedColor", "paletteExtended"]).first()}
-						authorNameColor={'orange'} //bookCover.getIn(["selectedColor", "paletteExtended"]).last()}
-						subTitleColor={'orange'} //bookCover.getIn(["selectedColor", "paletteExtended"]).last()}
-						// bookTitleColor={bookCover.getIn(["selectedColor", "paletteExtended"]).first()}
-						// authorNameColor={bookCover.getIn(["selectedColor", "paletteExtended"]).last()}
-						// subTitleColor={bookCover.getIn(["selectedColor", "paletteExtended"]).last()}
+						bookTitleColor={'orange'}
+						authorNameColor={'orange'}
+						subTitleColor={'orange'}
 
 						bookTitleText={bookCover.get('bookTitleText')}
 						authorNameText={bookCover.get('authorNameText')}
@@ -395,7 +367,6 @@ class WizardStep6 extends Component {
 						authorNameFonts={TEXT_FONTS_FOR_AUTHOR_CONST}
 						subTitleFonts={TEXT_FONTS_FOR_AUTHOR_CONST.slice(0, 2)}
 					/>
-					{/* } */}
 					<div style={refreshStyle}>
 						<button
 							style={{
@@ -403,12 +374,13 @@ class WizardStep6 extends Component {
 								pointerEvents: loading ? 'none' : 'all'
 							}}
 							className={this.bem('More-Button', { visible: true })}
-							onClick={(...args) => this.getBatch()}
+							onClick={(...args) => this.getBatch() }
 						>
 							Refresh
 						</button>
 					</div>
 				</Center>
+				this.state.loading ? <img src="/images/gifs/loading.gif" width="30" height="30" style={{ zIndex: 99999 }} /> : null
 				{!isLoggedIn && (
 					<SignupModal
 						onSignup={() => this.setState({ authorized: true })}
