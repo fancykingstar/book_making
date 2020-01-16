@@ -95,17 +95,19 @@ class WizardStep6 extends Component {
 
 	getImage(image, successHandler) {
 		const { bookCover } = this.props;
-
-		fetch('/api/style/transfer', {
+		const data = {
+            modelId: image.get("modelId"),
+            type: image.get("type"),
+            url: image.get("src"),
+            path: image.get("path"),
+        }
+        console.log(data, "**********");
+		fetch('/api/images/get', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({
-				webformatBase64: image.get('src').split(',')[1],
-				largeImageBase64: image.get('src').split(',')[1],
-				models: this.getStyles().join(',')
-			})
+			body: JSON.stringify(data)
 		}).then(response => {
 			if (!response.ok) return;
 
@@ -120,31 +122,21 @@ class WizardStep6 extends Component {
 
 		const fImage = bookCover.get('foregroundImage');
 		if (fImage) {
-			this.getImage(fImage, d => {
-				this.props.BookCoverActions.update({
-					foregroundImage: {
-						id: fImage.get('id'),
-						src: d.url,
-						modelId: d.modelId,
-						size: IMAGE_SIZES.get('WEB_FORMAT'),
-						path: d.path
-					}
-				});
+			this.props.BookCoverActions.update({
+				foregroundImage: {
+					id: fImage.get('id'),
+					src: fImage.get('src')
+				}
 			});
 		}
 
 		const bImage = bookCover.get('backgroundImage');
 		if (bImage) {
-			this.getImage(bImage, d => {
-				this.props.BookCoverActions.update({
-					backgroundImage: {
-						id: bImage.get('id'),
-						src: d.url,
-						modelId: d.modelId,
-						size: IMAGE_SIZES.get('WEB_FORMAT'),
-						path: d.path,
-					}
-				});
+			this.props.BookCoverActions.update({
+				backgroundImage: {
+					id: bImage.get('id'),
+					src: bImage.get('src')
+				}
 			});
 		}
 
@@ -266,7 +258,7 @@ class WizardStep6 extends Component {
 	}
 
 	getBatch() {
-		this.setState({ loading: true });
+		// this.setState({ loading: true });
 		if (this.batch) {
 			this.setState({ loading: true }, () => {
 				this.handleImages(
@@ -281,21 +273,6 @@ class WizardStep6 extends Component {
 	}
 
 	componentDidMount() {
-		// this.props.BookCoverActions.update({
-		// 	// bookTitleText: 'adsads',
-		// 	// authorNameText: 'asdasd adas da sd a',
-		// 	// subTitleText: 'asd adasd asd asd asd ad ads ads asd ',
-		// 	// bookDescription:
-		// 	// 	'asd ad sad asd ad adfs fgsagf dsgf fdsgsfdg sfdg sdgf dgf sfdg sdg df',
-		// 	// bookGenre: {title: 'Horror'},
-		// 	foregroundImage: '/images/textures/color.jpg',
-		// 	foregroundImageAlternatives: [],
-		// 	backgroundImage: '/images/textures/color.jpg',
-		// 	backgroundImageAlternatives: [],
-		// 	selectedColor: null,
-		// 	selectedStyles: []
-		// });
-
 		const { bookCover } = this.props;
 		// if (bookCover.get("updated")) {
 		this.getImages();
@@ -352,6 +329,21 @@ class WizardStep6 extends Component {
 		const { loading } = this.state;
 		const isLoggedIn = user && user.get('IsAuthorized');
 
+		const refreshStyle = {
+			    "display": "-webkit-flex;",
+			    "display": "flex",
+			    "align-items": "center",
+			    "justifyContent": "center",
+			    "position": "fixed",
+			    "bottom": "0",
+			    "left": "0",
+			    "right": "0",
+			    "z-index": "10",
+			    "background-color": "#fff",
+			    "padding": "22px 0 20px",
+			    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.1)"
+		}
+
 		return (
 			<article className={this.bem()}>
 				<Header
@@ -404,16 +396,18 @@ class WizardStep6 extends Component {
 						subTitleFonts={TEXT_FONTS_FOR_AUTHOR_CONST.slice(0, 2)}
 					/>
 					{/* } */}
-					<button
-						style={{
-							opacity: loading ? 0 : 1,
-							pointerEvents: loading ? 'none' : 'all'
-						}}
-						className={this.bem('More-Button', { visible: true })}
-						onClick={(...args) => this.getBatch()}
-					>
-						Refresh
-					</button>
+					<div style={refreshStyle}>
+						<button
+							style={{
+								opacity: loading ? 0 : 1,
+								pointerEvents: loading ? 'none' : 'all'
+							}}
+							className={this.bem('More-Button', { visible: true })}
+							onClick={(...args) => this.getBatch()}
+						>
+							Refresh
+						</button>
+					</div>
 				</Center>
 				{!isLoggedIn && (
 					<SignupModal
